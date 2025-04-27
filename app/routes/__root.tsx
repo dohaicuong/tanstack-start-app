@@ -1,10 +1,18 @@
 import {
+  QueryClient,
+  QueryClientProvider,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
+import {
   HeadContent,
   Outlet,
   Scripts,
   createRootRoute,
 } from '@tanstack/react-router'
-import type { ReactNode } from 'react'
+// @ts-ignore
+import pandaCss from './index.css?url'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -20,6 +28,7 @@ export const Route = createRootRoute({
         title: 'TanStack Start Starter',
       },
     ],
+    links: [{ rel: 'stylesheet', href: pandaCss }],
   }),
   component: RootComponent,
 })
@@ -32,14 +41,18 @@ function RootComponent() {
   )
 }
 
-function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+const queryClient = new QueryClient()
+
+function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-AU">
+    <html lang="en-AU" className="dark">
       <head>
         <HeadContent />
       </head>
       <body>
-        {children}
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
         <Scripts />
       </body>
     </html>
