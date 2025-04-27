@@ -1,16 +1,10 @@
 import {
-  QueryClient,
-  QueryClientProvider,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query'
-import {
   HeadContent,
   Outlet,
   Scripts,
   createRootRoute,
 } from '@tanstack/react-router'
+import { TRPCQueryProvider } from '~/trpc/client'
 // @ts-ignore
 import pandaCss from './index.css?url'
 
@@ -41,8 +35,6 @@ function RootComponent() {
   )
 }
 
-const queryClient = new QueryClient()
-
 function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-AU" className="dark">
@@ -50,9 +42,7 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
         <HeadContent />
       </head>
       <body>
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
+        <TRPCQueryProvider>{children}</TRPCQueryProvider>
         <Scripts />
       </body>
     </html>

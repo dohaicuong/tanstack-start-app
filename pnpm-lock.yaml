@@ -26,6 +26,15 @@ importers:
       '@tanstack/react-start':
         specifier: ^1.116.1
         version: 1.116.1(@libsql/client@0.15.4)(@netlify/blobs@8.2.0)(@tanstack/react-router@1.116.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/node@22.15.2)(db0@0.3.2(@libsql/client@0.15.4)(drizzle-orm@0.43.1(@libsql/client@0.15.4)(kysely@0.27.6)))(drizzle-orm@0.43.1(@libsql/client@0.15.4)(kysely@0.27.6))(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.25.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(terser@5.39.0)(tsx@4.19.3)(vite@6.3.2(@types/node@22.15.2)(jiti@2.4.2)(lightningcss@1.25.1)(terser@5.39.0)(tsx@4.19.3))
+      '@trpc/client':
+        specifier: ^11.1.1
+        version: 11.1.1(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3)
+      '@trpc/server':
+        specifier: ^11.1.1
+        version: 11.1.1(typescript@5.8.3)
+      '@trpc/tanstack-react-query':
+        specifier: ^11.1.1
+        version: 11.1.1(@tanstack/react-query@5.74.4(react@19.1.0))(@trpc/client@11.1.1(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3))(@trpc/server@11.1.1(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)
       better-auth:
         specifier: ^1.2.7
         version: 1.2.7
@@ -1721,6 +1730,27 @@ packages:
   '@tanstack/virtual-file-routes@1.115.0':
     resolution: {integrity: sha512-XLUh1Py3AftcERrxkxC5Y5m5mfllRH3YR6YVlyjFgI2Tc2Ssy2NKmQFQIafoxfW459UJ8Dn81nWKETEIJifE4g==}
     engines: {node: '>=12'}
+
+  '@trpc/client@11.1.1':
+    resolution: {integrity: sha512-Beiv56hlt+ARbijtUsCQOvKJw/FkfuVk4W9TzJl285iIJw8iCA3ZTwTG9GjIeSgeR7d2MyOeUbI26LV255n33A==}
+    peerDependencies:
+      '@trpc/server': 11.1.1
+      typescript: '>=5.7.2'
+
+  '@trpc/server@11.1.1':
+    resolution: {integrity: sha512-ZjPN3ypBHvGMAlMgeZPrxlRcH/3dn4AK0s5Ph1z+E6uiAvIQVCj7ZoMlXeeBsIy4THGDAk953jHVW2kMnlbb4g==}
+    peerDependencies:
+      typescript: '>=5.7.2'
+
+  '@trpc/tanstack-react-query@11.1.1':
+    resolution: {integrity: sha512-yLEGAixJk4f4epjuilhO2wZV/u6/Gwl0rjTep1C71HcLB09kJdphACf2c8z2fGnKpAbMDSlg3YXzR92eItkR4w==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.67.1
+      '@trpc/client': 11.1.1
+      '@trpc/server': 11.1.1
+      react: '>=18.2.0'
+      react-dom: '>=18.2.0'
+      typescript: '>=5.7.2'
 
   '@ts-morph/common@0.25.0':
     resolution: {integrity: sha512-kMnZz+vGGHi4GoHnLmMhGNjm44kGtKUXGnOvrKmMwAuvNjM/PgKVGfUnL7IDvK7Jb2QQ82jq3Zmp04Gy+r3Dkg==}
@@ -6993,6 +7023,24 @@ snapshots:
   '@tanstack/store@0.7.0': {}
 
   '@tanstack/virtual-file-routes@1.115.0': {}
+
+  '@trpc/client@11.1.1(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3)':
+    dependencies:
+      '@trpc/server': 11.1.1(typescript@5.8.3)
+      typescript: 5.8.3
+
+  '@trpc/server@11.1.1(typescript@5.8.3)':
+    dependencies:
+      typescript: 5.8.3
+
+  '@trpc/tanstack-react-query@11.1.1(@tanstack/react-query@5.74.4(react@19.1.0))(@trpc/client@11.1.1(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3))(@trpc/server@11.1.1(typescript@5.8.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.8.3)':
+    dependencies:
+      '@tanstack/react-query': 5.74.4(react@19.1.0)
+      '@trpc/client': 11.1.1(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3)
+      '@trpc/server': 11.1.1(typescript@5.8.3)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      typescript: 5.8.3
 
   '@ts-morph/common@0.25.0':
     dependencies:
