@@ -6,10 +6,23 @@ import {
   createRootRoute,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import { createServerFn } from '@tanstack/react-start'
+import { getWebRequest } from '@tanstack/react-start/server'
+import { auth } from '~/auth'
 import { TRPCQueryProvider } from '~/trpc/client'
-
 // @ts-ignore
 import pandaCss from './index.css?url'
+
+const fetchBetterAuth = createServerFn({ method: 'GET' }).handler(async () => {
+  // biome-ignore lint/style/noNonNullAssertion:
+  const request = getWebRequest()!
+
+  const session = await auth.api.getSession({
+    headers: request.headers,
+  })
+
+  return session
+})
 
 export const Route = createRootRoute({
   head: () => ({
@@ -27,6 +40,14 @@ export const Route = createRootRoute({
     ],
     links: [{ rel: 'stylesheet', href: pandaCss }],
   }),
+  beforeLoad: async () => {
+    const res = await fetchBetterAuth()
+
+    return {
+      session: res?.session,
+      user: res?.user,
+    }
+  },
   component: RootComponent,
 })
 
