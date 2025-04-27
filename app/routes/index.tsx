@@ -1,30 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
-import { useEffect } from 'react'
 import { authClient } from '~/auth-client'
 import { Spinner } from '~/components/ui/spinner'
-import { db } from '~/db'
-import { postTable } from '~/db/schema'
-import { fetsClient, fetsHelloQueryOptions } from '~/fets/client'
+import { fetsHelloQueryOptions } from '~/fets/client'
 import { useTRPC } from '~/trpc/client'
-
-export const getPost = createServerFn().handler(async () => {
-  return db.select().from(postTable)
-})
 
 export const Route = createFileRoute('/')({
   component: Home,
-  loader: async () => {
-    return {
-      // posts: await getPost(),
-    }
-  },
 })
 
 function Home() {
-  // const state = Route.useLoaderData()
-
   return (
     <div>
       <Auth />
@@ -41,7 +26,14 @@ const Auth = () => {
 
   return (
     <p>
-      {data?.user.name} {data?.user.email}
+      Hello from better-auth!{' '}
+      {data ? (
+        <>
+          {data.user.name} {data.user.email}
+        </>
+      ) : (
+        <>No user plz login</>
+      )}
     </p>
   )
 }

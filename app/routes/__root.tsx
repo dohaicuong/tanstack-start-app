@@ -1,10 +1,13 @@
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import {
   HeadContent,
   Outlet,
   Scripts,
   createRootRoute,
 } from '@tanstack/react-router'
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import { TRPCQueryProvider } from '~/trpc/client'
+
 // @ts-ignore
 import pandaCss from './index.css?url'
 
@@ -42,7 +45,11 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
         <HeadContent />
       </head>
       <body>
-        <TRPCQueryProvider>{children}</TRPCQueryProvider>
+        <TRPCQueryProvider>
+          {children}
+          <TanStackRouterDevtools position="bottom-right" />
+          <ReactQueryDevtools buttonPosition="bottom-left" />
+        </TRPCQueryProvider>
         <Scripts />
       </body>
     </html>
