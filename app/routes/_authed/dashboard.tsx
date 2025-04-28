@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { authClient } from '~/auth-client'
+import { Button } from '~/components/ui/button'
 import { Spinner } from '~/components/ui/spinner'
-import { fetsHelloQueryOptions } from '~/fets/client'
 import { useTRPC } from '~/trpc/client'
 
 export const Route = createFileRoute('/_authed/dashboard')({
@@ -10,10 +10,19 @@ export const Route = createFileRoute('/_authed/dashboard')({
 })
 
 function RouteComponent() {
+  const navigate = Route.useNavigate()
+
   return (
     <div>
+      <Button
+        onClick={async () => {
+          await authClient.signOut()
+          navigate({ to: '/' })
+        }}
+      >
+        Logout
+      </Button>
       <Auth />
-      <Fets />
       <Trpc />
     </div>
   )
@@ -36,14 +45,6 @@ const Auth = () => {
       )}
     </p>
   )
-}
-
-const Fets = () => {
-  const request = useQuery(fetsHelloQueryOptions())
-
-  if (request.isLoading) return <Spinner />
-
-  return <p>{request.data?.message}</p>
 }
 
 const Trpc = () => {
