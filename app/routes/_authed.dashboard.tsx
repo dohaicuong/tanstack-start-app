@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
+import { css } from 'styled-system/css'
+import z, { number } from 'zod'
 import { authClient } from '~/auth-client'
+import { useAppForm } from '~/components/form'
 import { Button } from '~/components/ui/button'
 import { Spinner } from '~/components/ui/spinner'
 import { useTRPC } from '~/trpc/client'
@@ -22,37 +25,66 @@ function RouteComponent() {
       >
         Logout
       </Button>
-      <Auth />
-      <Trpc />
+      <ShowcaseForm />
     </div>
   )
 }
 
-const Auth = () => {
-  const { data, isPending } = authClient.useSession()
+const formSchema = z.object({
+  text: z.string().min(8, 'minimun length 8'),
+  number: z.number().min(8, 'minumum value 8'),
+})
 
-  if (isPending) return <Spinner />
+const ShowcaseForm = () => {
+  const form = useAppForm({
+    defaultValues: {
+      text: '',
+      number: 10,
+    },
+    validators: {
+      onSubmit: formSchema,
+    },
+    onSubmit: (data) => console.log(data.value),
+  })
 
   return (
-    <p>
-      Hello from better-auth!{' '}
-      {data ? (
-        <>
-          {data.user.name} {data.user.email}
-        </>
-      ) : (
-        <>No user plz login</>
-      )}
-    </p>
+    <form.AppForm>
+      <form
+        className={css({
+          marginTop: '12',
+          marginLeft: '12',
+          display: 'flex',
+          flexDir: 'column',
+          gap: '4',
+          width: '256px',
+          smDown: {
+            width: '100%',
+            alignItems: 'center',
+          },
+        })}
+        onSubmit={(e) => {
+          e.preventDefault()
+          form.handleSubmit()
+        }}
+      >
+        <form.AppField name="text">
+          {(field) => <field.TextField label="Text Field" />}
+        </form.AppField>
+
+        <form.AppField name="number">
+          {(field) => <field.NumberField label="Text Field" />}
+        </form.AppField>
+        <div
+          className={css({
+            display: 'flex',
+            gap: '2',
+            justifyContent: 'flex-end',
+            marginTop: '6',
+          })}
+        >
+          <form.FormButton type="submit">submit</form.FormButton>
+        </div>
+      </form>
+    </form.AppForm>
   )
-}
-
-const Trpc = () => {
-  const trpc = useTRPC()
-
-  const request = useQuery(trpc.hello.queryOptions())
-
-  if (request.isLoading) return <Spinner />
-
-  return <p>{request.data}</p>
 }
