@@ -11,5 +11,5 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": ["app", "src", "emails", "styled-system"]
+  "include": ["app", "src", "src/emails", "styled-system"]
 }

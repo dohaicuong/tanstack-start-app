@@ -12,7 +12,7 @@
     "lint": "biome lint --write .",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio --port 4001",
-    "mail:dev": "email dev"
+    "mail:dev": "email dev -d src/emails"
   },
   "dependencies": {
     "@ark-ui/react": "^5.7.0",

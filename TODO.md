@@ -8,3 +8,7 @@ form integration
   [ ] file-upload-field
   [ ] radio-group-field
   [ ] checkbox-group-field
+
+storage integration
+  [ ] cloudflare images
+  [ ] cloudflare r2 object storage
