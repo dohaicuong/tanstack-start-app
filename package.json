@@ -11,12 +11,14 @@
     "format": "biome format --write .",
     "lint": "biome lint --write .",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio --port 4001"
+    "db:studio": "drizzle-kit studio --port 4001",
+    "mail:dev": "email dev"
   },
   "dependencies": {
     "@ark-ui/react": "^5.7.0",
     "@biomejs/biome": "^1.9.4",
     "@libsql/client": "^0.15.4",
+    "@react-email/components": "^0.0.36",
     "@tanstack/react-form": "^1.7.0",
     "@tanstack/react-query": "^5.74.4",
     "@tanstack/react-router": "^1.116.0",
@@ -30,6 +32,7 @@
     "lefthook": "^1.11.10",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "resend": "^4.4.1",
     "vinxi": "^0.5.4",
     "zod": "4.0.0-beta.20250424T163858"
   },
@@ -43,6 +46,7 @@
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.0",
     "drizzle-kit": "^0.31.0",
+    "react-email": "^4.0.7",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3",
     "vite-tsconfig-paths": "^5.1.4"

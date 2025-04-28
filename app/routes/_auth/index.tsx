@@ -1,18 +1,14 @@
-import { useQuery } from '@tanstack/react-query'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { css } from 'styled-system/css'
 import { z } from 'zod'
 import { useAppForm } from '~/components/form'
-import { Heading } from '~/components/ui/heading'
-import { Spinner } from '~/components/ui/spinner'
-import { Text } from '~/components/ui/text'
-import { useTRPC } from '~/trpc/client'
 
+import { useState } from 'react'
 import { authClient } from '~/auth-client'
 import { Button } from '~/components/ui/button'
+import { Dialog } from '~/components/ui/dialog'
+import { Field } from '~/components/ui/field'
 import { Link } from '~/components/ui/link'
-// @ts-ignore
-import miku from './miku.png?url'
 
 export const Route = createFileRoute('/_auth/')({
   beforeLoad: (ctx) => {
@@ -74,7 +70,8 @@ function Home() {
         <form.AppField name="password">
           {(field) => <field.TextField label="Password" type="password" />}
         </form.AppField>
-        <Link textStyle="xs">Forgot password?</Link>
+
+        {/* <ResetPasswordDialog /> */}
 
         <div
           className={css({
@@ -91,9 +88,51 @@ function Home() {
           >
             create account
           </Button>
-          <form.FormButton type="submit">Login</form.FormButton>
+          <form.FormButton type="submit">login</form.FormButton>
         </div>
       </form>
     </form.AppForm>
+  )
+}
+
+const ResetPasswordDialog = () => {
+  const [email, setEmail] = useState('')
+  return (
+    <Dialog.Root>
+      <Dialog.Trigger asChild>
+        <Link textStyle="xs">Forgot password?</Link>
+      </Dialog.Trigger>
+      <Dialog.Backdrop />
+      <Dialog.Positioner>
+        <Dialog.Content
+          className={css({
+            padding: '4',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '4',
+          })}
+        >
+          <Field.Root>
+            <Field.Input
+              placeholder="Your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Field.Root>
+          <div>
+            <Button
+              onClick={() =>
+                authClient.forgetPassword({
+                  email,
+                  redirectTo: '/reset-password',
+                })
+              }
+            >
+              send link
+            </Button>
+          </div>
+        </Dialog.Content>
+      </Dialog.Positioner>
+    </Dialog.Root>
   )
 }

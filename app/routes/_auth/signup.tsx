@@ -79,7 +79,7 @@ function RouteComponent() {
           >
             login instead
           </Button>
-          <form.FormButton type="submit">Sign up</form.FormButton>
+          <form.FormButton type="submit">sign up</form.FormButton>
         </div>
       </form>
     </form.AppForm>
