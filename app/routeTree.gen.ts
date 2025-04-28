@@ -13,9 +13,9 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthedImport } from './routes/_authed'
 import { Route as AuthImport } from './routes/_auth'
-import { Route as AuthIndexImport } from './routes/_auth.index'
+import { Route as AuthIndexImport } from './routes/_auth/index'
 import { Route as AuthedDashboardImport } from './routes/_authed/dashboard'
-import { Route as AuthSignupImport } from './routes/_auth.signup'
+import { Route as AuthSignupImport } from './routes/_auth/signup'
 
 // Create/Update Routes
 
@@ -190,7 +190,7 @@ export const routeTree = rootRoute
       ]
     },
     "/_auth/signup": {
-      "filePath": "_auth.signup.tsx",
+      "filePath": "_auth/signup.tsx",
       "parent": "/_auth"
     },
     "/_authed/dashboard": {
@@ -198,7 +198,7 @@ export const routeTree = rootRoute
       "parent": "/_authed"
     },
     "/_auth/": {
-      "filePath": "_auth.index.tsx",
+      "filePath": "_auth/index.tsx",
       "parent": "/_auth"
     }
   }
