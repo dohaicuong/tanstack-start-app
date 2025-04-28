@@ -12,3 +12,6 @@ form integration
 storage integration
   [ ] cloudflare images
   [ ] cloudflare r2 object storage
+
+db
+  [ ] turso + sqlite local?
