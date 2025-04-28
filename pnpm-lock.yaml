@@ -32,6 +32,9 @@ importers:
       '@tanstack/react-start':
         specifier: ^1.116.1
         version: 1.116.1(@libsql/client@0.15.4)(@netlify/blobs@8.2.0)(@tanstack/react-router@1.116.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/node@22.15.2)(babel-plugin-macros@3.1.0)(db0@0.3.2(@libsql/client@0.15.4)(drizzle-orm@0.43.1(@libsql/client@0.15.4)(kysely@0.27.6)))(drizzle-orm@0.43.1(@libsql/client@0.15.4)(kysely@0.27.6))(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.25.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(terser@5.39.0)(tsx@4.19.3)(vite@6.3.2(@types/node@22.15.2)(jiti@2.4.2)(lightningcss@1.25.1)(terser@5.39.0)(tsx@4.19.3))
+      '@tanstack/zod-adapter':
+        specifier: ^1.117.1
+        version: 1.117.1(@tanstack/react-router@1.116.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(zod@4.0.0-beta.20250424T163858)
       '@trpc/client':
         specifier: ^11.1.1
         version: 11.1.1(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3)
@@ -2240,6 +2243,13 @@ packages:
   '@tanstack/virtual-file-routes@1.115.0':
     resolution: {integrity: sha512-XLUh1Py3AftcERrxkxC5Y5m5mfllRH3YR6YVlyjFgI2Tc2Ssy2NKmQFQIafoxfW459UJ8Dn81nWKETEIJifE4g==}
     engines: {node: '>=12'}
+
+  '@tanstack/zod-adapter@1.117.1':
+    resolution: {integrity: sha512-Z8Tyh9lyhsNgaliw9kSfFcYUkBm2h56tguXep2MsmBetIVkEG0lbvXEAU4d39J+ZSLkuSKx+HRXAhyNHMNsDfw==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@tanstack/react-router': '>=1.43.2'
+      zod: ^3.23.8
 
   '@trpc/client@11.1.1':
     resolution: {integrity: sha512-Beiv56hlt+ARbijtUsCQOvKJw/FkfuVk4W9TzJl285iIJw8iCA3ZTwTG9GjIeSgeR7d2MyOeUbI26LV255n33A==}
@@ -8231,6 +8241,11 @@ snapshots:
   '@tanstack/store@0.7.0': {}
 
   '@tanstack/virtual-file-routes@1.115.0': {}
+
+  '@tanstack/zod-adapter@1.117.1(@tanstack/react-router@1.116.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(zod@4.0.0-beta.20250424T163858)':
+    dependencies:
+      '@tanstack/react-router': 1.116.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      zod: 4.0.0-beta.20250424T163858
 
   '@trpc/client@11.1.1(@trpc/server@11.1.1(typescript@5.8.3))(typescript@5.8.3)':
     dependencies:

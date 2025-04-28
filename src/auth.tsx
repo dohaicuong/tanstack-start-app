@@ -17,7 +17,7 @@ export const auth = betterAuth({
     sendResetPassword: async ({ user, url, token }, request) => {
       // need to get and validate a custom domain for resend
       await resend.emails.send({
-        from: 'me@example.com',
+        from: 'admin@yukiyami.cc',
         to: user.email,
         subject: 'Reset your password',
         react: <ResetPasswordMail name={user.name} url={url} />,

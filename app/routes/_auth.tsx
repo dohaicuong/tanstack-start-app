@@ -25,11 +25,15 @@ export const Route = createFileRoute('/_auth')({
 function RouteComponent() {
   const matchRoute = useMatchRoute()
   const isSignup = Boolean(matchRoute({ to: '/signup' }))
+  const isResetPassword = Boolean(matchRoute({ to: '/reset-password' }))
+
   const title = useMemo(() => {
     if (isSignup) return 'Create an account'
 
+    if (isResetPassword) return 'Reset password'
+
     return 'Sign in'
-  }, [isSignup])
+  }, [isSignup, isResetPassword])
 
   return (
     <div

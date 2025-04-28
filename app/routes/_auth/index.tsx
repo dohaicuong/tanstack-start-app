@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { authClient } from '~/auth-client'
 import { Button } from '~/components/ui/button'
 import { Dialog } from '~/components/ui/dialog'
-import { Field } from '~/components/ui/field'
+import { Heading } from '~/components/ui/heading'
 import { Link } from '~/components/ui/link'
 
 export const Route = createFileRoute('/_auth/')({
@@ -19,14 +19,56 @@ export const Route = createFileRoute('/_auth/')({
   component: Home,
 })
 
+function Home() {
+  const [forgotPasswordDialogOpen, setForgotPasswordDialogOpen] =
+    useState(false)
+  const navigate = Route.useNavigate()
+
+  return (
+    <Dialog.Root
+      open={forgotPasswordDialogOpen}
+      onOpenChange={(details) => setForgotPasswordDialogOpen(details.open)}
+    >
+      <LoginForm
+        onSignedIn={() => navigate({ to: '/dashboard' })}
+        passwordAction={
+          <Dialog.Trigger asChild>
+            <Link textStyle="xs">Forgot password?</Link>
+          </Dialog.Trigger>
+        }
+        secondaryAction={
+          <Button
+            variant="ghost"
+            type="button"
+            onClick={() => navigate({ to: '/signup' })}
+          >
+            create account
+          </Button>
+        }
+      />
+      <ForgotPasswordDialog
+        onClose={() => setForgotPasswordDialogOpen(false)}
+      />
+    </Dialog.Root>
+  )
+}
+
+type LoginFormProps = {
+  onSignedIn: () => void
+  passwordAction?: React.ReactNode
+  secondaryAction?: React.ReactNode
+}
+
 const loginSchema = z.object({
   email: z.email(),
   password: z.string().min(8, 'at least 8 characters'),
 })
 
-function Home() {
-  const navigate = Route.useNavigate()
-
+const LoginForm = ({
+  onSignedIn,
+  passwordAction,
+  secondaryAction,
+}: LoginFormProps) => {
   const form = useAppForm({
     defaultValues: {
       email: '',
@@ -40,7 +82,7 @@ function Home() {
         email: data.value.email,
         password: data.value.password,
       })
-      navigate({ to: '/dashboard' })
+      onSignedIn()
     },
   })
 
@@ -71,7 +113,7 @@ function Home() {
           {(field) => <field.TextField label="Password" type="password" />}
         </form.AppField>
 
-        {/* <ResetPasswordDialog /> */}
+        {passwordAction}
 
         <div
           className={css({
@@ -81,13 +123,7 @@ function Home() {
             marginTop: '6',
           })}
         >
-          <Button
-            variant="ghost"
-            type="button"
-            onClick={() => navigate({ to: '/signup' })}
-          >
-            create account
-          </Button>
+          {secondaryAction}
           <form.FormButton type="submit">login</form.FormButton>
         </div>
       </form>
@@ -95,13 +131,33 @@ function Home() {
   )
 }
 
-const ResetPasswordDialog = () => {
-  const [email, setEmail] = useState('')
+type ForgotPasswordDialogProps = {
+  onClose: () => void
+}
+
+const forgotPasswordSchema = z.object({
+  email: z.email(),
+})
+
+const ForgotPasswordDialog = ({ onClose }: ForgotPasswordDialogProps) => {
+  const form = useAppForm({
+    defaultValues: {
+      email: '',
+    },
+    validators: {
+      onSubmit: forgotPasswordSchema,
+    },
+    onSubmit: async (data) => {
+      await authClient.forgetPassword({
+        email: data.value.email,
+        redirectTo: '/reset-password',
+      })
+      onClose
+    },
+  })
+
   return (
-    <Dialog.Root>
-      <Dialog.Trigger asChild>
-        <Link textStyle="xs">Forgot password?</Link>
-      </Dialog.Trigger>
+    <>
       <Dialog.Backdrop />
       <Dialog.Positioner>
         <Dialog.Content
@@ -112,27 +168,35 @@ const ResetPasswordDialog = () => {
             gap: '4',
           })}
         >
-          <Field.Root>
-            <Field.Input
-              placeholder="Your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Field.Root>
-          <div>
-            <Button
-              onClick={() =>
-                authClient.forgetPassword({
-                  email,
-                  redirectTo: '/reset-password',
-                })
-              }
+          <Heading as="h1" size="lg">
+            Send reset password email
+          </Heading>
+          <form.AppForm>
+            <form
+              className={css({
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4',
+              })}
+              onSubmit={(e) => {
+                form.handleSubmit()
+              }}
             >
-              send link
-            </Button>
-          </div>
+              <form.AppField name="email">
+                {(field) => <field.TextField label="your email" />}
+              </form.AppField>
+              <div
+                className={css({ display: 'flex', justifyContent: 'flex-end' })}
+              >
+                <Button variant="ghost" onClick={onClose}>
+                  cancel
+                </Button>
+                <form.FormButton type="submit">send link</form.FormButton>
+              </div>
+            </form>
+          </form.AppForm>
         </Dialog.Content>
       </Dialog.Positioner>
-    </Dialog.Root>
+    </>
   )
 }
