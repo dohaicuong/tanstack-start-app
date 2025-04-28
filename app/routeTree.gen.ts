@@ -13,10 +13,10 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthedImport } from './routes/_authed'
 import { Route as AuthImport } from './routes/_auth'
-import { Route as AuthIndexImport } from './routes/_auth/index'
-import { Route as AuthedDashboardImport } from './routes/_authed/dashboard'
-import { Route as AuthSignupImport } from './routes/_auth/signup'
-import { Route as AuthResetPasswordImport } from './routes/_auth/reset-password'
+import { Route as AuthIndexImport } from './routes/_auth.index'
+import { Route as AuthedDashboardImport } from './routes/_authed.dashboard'
+import { Route as AuthSignupImport } from './routes/_auth.signup'
+import { Route as AuthResetPasswordImport } from './routes/_auth.reset-password'
 
 // Create/Update Routes
 
@@ -211,19 +211,19 @@ export const routeTree = rootRoute
       ]
     },
     "/_auth/reset-password": {
-      "filePath": "_auth/reset-password.tsx",
+      "filePath": "_auth.reset-password.tsx",
       "parent": "/_auth"
     },
     "/_auth/signup": {
-      "filePath": "_auth/signup.tsx",
+      "filePath": "_auth.signup.tsx",
       "parent": "/_auth"
     },
     "/_authed/dashboard": {
-      "filePath": "_authed/dashboard.tsx",
+      "filePath": "_authed.dashboard.tsx",
       "parent": "/_authed"
     },
     "/_auth/": {
-      "filePath": "_auth/index.tsx",
+      "filePath": "_auth.index.tsx",
       "parent": "/_auth"
     }
   }

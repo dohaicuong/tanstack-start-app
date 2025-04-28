@@ -188,7 +188,14 @@ const ForgotPasswordDialog = ({ onClose }: ForgotPasswordDialogProps) => {
               <div
                 className={css({ display: 'flex', justifyContent: 'flex-end' })}
               >
-                <Button variant="ghost" onClick={onClose}>
+                <Button
+                  variant="ghost"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    onClose()
+                  }}
+                >
                   cancel
                 </Button>
                 <form.FormButton type="submit">send link</form.FormButton>
