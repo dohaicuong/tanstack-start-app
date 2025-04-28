@@ -1,12 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { css } from 'styled-system/css'
-import z, { number } from 'zod'
+import z from 'zod'
 import { authClient } from '~/auth-client'
 import { useAppForm } from '~/components/form'
 import { Button } from '~/components/ui/button'
-import { Spinner } from '~/components/ui/spinner'
-import { useTRPC } from '~/trpc/client'
 
 export const Route = createFileRoute('/_authed/dashboard')({
   component: RouteComponent,
@@ -69,6 +66,10 @@ const ShowcaseForm = () => {
       >
         <form.AppField name="text">
           {(field) => <field.TextField label="Text Field" />}
+        </form.AppField>
+
+        <form.AppField name="text">
+          {(field) => <field.TextAreaField label="Text Area Field" />}
         </form.AppField>
 
         <form.AppField name="number">

@@ -1,7 +1,7 @@
 form integration
   [x] text-field
+  [x] textarea-field
   [x] number-field
-  [ ] textarea-field
   [ ] select-field
   [ ] switch-field
   [ ] date-field
