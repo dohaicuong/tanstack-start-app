@@ -1,9 +1,12 @@
+import { createListCollection } from '@ark-ui/react'
 import { createFileRoute } from '@tanstack/react-router'
+import { CheckIcon } from 'lucide-react'
 import { css } from 'styled-system/css'
 import z from 'zod'
 import { authClient } from '~/auth-client'
 import { useAppForm } from '~/components/form'
 import { Button } from '~/components/ui/button'
+import { Select } from '~/components/ui/select'
 
 export const Route = createFileRoute('/_authed/dashboard')({
   component: RouteComponent,
@@ -30,13 +33,15 @@ function RouteComponent() {
 const formSchema = z.object({
   text: z.string().min(8, 'minimun length 8'),
   number: z.number().min(8, 'minumum value 8'),
+  select: z.string().min(1, 'required'),
 })
 
 const ShowcaseForm = () => {
   const form = useAppForm({
     defaultValues: {
       text: '',
-      number: 10,
+      number: 7,
+      select: '',
     },
     validators: {
       onSubmit: formSchema,
@@ -54,10 +59,6 @@ const ShowcaseForm = () => {
           flexDir: 'column',
           gap: '4',
           width: '256px',
-          smDown: {
-            width: '100%',
-            alignItems: 'center',
-          },
         })}
         onSubmit={(e) => {
           e.preventDefault()
@@ -73,7 +74,26 @@ const ShowcaseForm = () => {
         </form.AppField>
 
         <form.AppField name="number">
-          {(field) => <field.NumberField label="Text Field" />}
+          {(field) => <field.NumberField label="Number Field" />}
+        </form.AppField>
+
+        <form.AppField name="select">
+          {(field) => (
+            <field.SelectField
+              label="Select Field"
+              items={[
+                { label: 'React', value: 'react', group: 'framework' },
+                { label: 'Solid', value: 'solid', group: 'framework' },
+                { label: 'Vue', value: 'vue', group: 'framework' },
+                {
+                  label: 'Svelte',
+                  value: 'svelte',
+                  disabled: true,
+                  group: 'framework',
+                },
+              ]}
+            />
+          )}
         </form.AppField>
         <div
           className={css({

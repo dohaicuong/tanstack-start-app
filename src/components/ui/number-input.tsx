@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
 import * as StyledNumberInput from './styled/number-input'
+import { css } from 'styled-system/css'
 
 export interface NumberInputProps extends StyledNumberInput.RootProps {}
 
@@ -11,7 +12,14 @@ export const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
         {children && (
           <StyledNumberInput.Label>{children}</StyledNumberInput.Label>
         )}
-        <StyledNumberInput.Control>
+        <StyledNumberInput.Control className={css({
+          _invalid: {
+            borderColor: 'border.error',
+            _focusWithin: {
+              boxShadow: '0 0 0 1px var(--colors-border-error)',
+            }
+          }
+        })}>
           <StyledNumberInput.Input />
           <StyledNumberInput.IncrementTrigger>
             <ChevronUpIcon />

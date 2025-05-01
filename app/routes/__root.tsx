@@ -11,6 +11,8 @@ import { getWebRequest } from '@tanstack/react-start/server'
 import { auth } from '~/auth'
 import { TRPCQueryProvider } from '~/trpc/client'
 // @ts-ignore
+import favicon from '../../public/favicon.ico?url'
+// @ts-ignore
 import pandaCss from './index.css?url'
 
 const fetchBetterAuth = createServerFn({ method: 'GET' }).handler(async () => {
@@ -38,7 +40,10 @@ export const Route = createRootRoute({
         title: 'TanStack Start Starter',
       },
     ],
-    links: [{ rel: 'stylesheet', href: pandaCss }],
+    links: [
+      { rel: 'stylesheet', href: pandaCss },
+      { rel: 'icon', type: 'image/x-icon', href: favicon },
+    ],
   }),
   beforeLoad: async () => {
     const res = await fetchBetterAuth()

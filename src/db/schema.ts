@@ -1,5 +1,6 @@
 import { int, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 
+// AUTH table
 export const user = sqliteTable('user', {
   id: text('id').primaryKey(),
   name: text('name').notNull(),
@@ -54,6 +55,7 @@ export const verification = sqliteTable('verification', {
   updatedAt: integer('updated_at', { mode: 'timestamp' }),
 })
 
+// my service table
 export const postTable = sqliteTable('posts', {
   id: int().primaryKey({ autoIncrement: true }),
   title: text().notNull(),

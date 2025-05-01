@@ -12,7 +12,7 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
-    sendResetPassword: async ({ user, url, token }, request) => {
+    sendResetPassword: async ({ user, url }) => {
       // need to get and validate a custom domain for resend
       await resend.emails.send({
         from: 'admin@yukiyami.cc',

@@ -2,7 +2,7 @@ form integration
   [x] text-field
   [x] textarea-field
   [x] number-field
-  [ ] select-field
+  [x] select-field
   [ ] switch-field
   [ ] date-field
   [ ] file-upload-field
