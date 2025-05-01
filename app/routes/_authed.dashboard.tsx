@@ -59,7 +59,7 @@ const ShowcaseForm = () => {
           display: 'flex',
           flexDir: 'column',
           gap: '4',
-          width: '256px',
+          width: '400px',
         })}
         onSubmit={(e) => {
           e.preventDefault()

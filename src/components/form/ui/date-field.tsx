@@ -16,8 +16,8 @@ import {
 } from './_date_picker'
 
 export type DateFieldProps = Omit<
-  Field.InputProps,
-  'name' | 'value' | 'onChange'
+  DatePicker.RootProps,
+  'name' | 'value' | 'onChange' | 'onValueChange' | 'selectionMode'
 > & {
   invalid?: boolean
   disabled?: boolean
@@ -53,7 +53,8 @@ export const DateField: React.FC<DateFieldProps> = ({
       disabled={disabled || isSubmitting}
     >
       <DatePicker.Root
-        positioning={{ sameWidth: true }}
+        {...props}
+        positioning={{ sameWidth: true, ...props.positioning }}
         disabled={disabled || isSubmitting}
         name={field.name}
         value={value}
@@ -67,7 +68,6 @@ export const DateField: React.FC<DateFieldProps> = ({
           <DatePicker.Input index={0} asChild>
             {/* @ts-ignore */}
             <Input
-              {...props}
               name={field.name}
               aria-invalid={
                 invalid || field.state.meta.errors.length ? true : null

@@ -16,8 +16,8 @@ import {
 } from './_date_picker'
 
 export type DateRangeFieldProps = Omit<
-  Field.InputProps,
-  'name' | 'value' | 'onChange'
+  DatePicker.RootProps,
+  'name' | 'value' | 'onChange' | 'onValueChange' | 'selectionMode'
 > & {
   invalid?: boolean
   disabled?: boolean
@@ -53,8 +53,8 @@ export const DateRangeField: React.FC<DateRangeFieldProps> = ({
       disabled={disabled || isSubmitting}
     >
       <DatePicker.Root
-        positioning={{ sameWidth: true }}
-        // selectionMode="range"
+        {...props}
+        positioning={{ sameWidth: true, ...props.positioning }}
         selectionMode="range"
         disabled={disabled || isSubmitting}
         name={field.name}
