@@ -3,9 +3,10 @@ form integration
   [x] textarea-field
   [x] number-field
   [x] select-field
-  [ ] switch-field
-  [ ] date-field
+  [x] date-field
+  [x] date-range-field
   [ ] file-upload-field
+  [ ] switch-field
   [ ] radio-group-field
   [ ] checkbox-group-field
 

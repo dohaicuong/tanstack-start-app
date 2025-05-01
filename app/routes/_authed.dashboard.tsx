@@ -1,12 +1,9 @@
-import { createListCollection } from '@ark-ui/react'
 import { createFileRoute } from '@tanstack/react-router'
-import { CheckIcon } from 'lucide-react'
 import { css } from 'styled-system/css'
 import z from 'zod'
 import { authClient } from '~/auth-client'
 import { useAppForm } from '~/components/form'
 import { Button } from '~/components/ui/button'
-import { Select } from '~/components/ui/select'
 
 export const Route = createFileRoute('/_authed/dashboard')({
   component: RouteComponent,
@@ -33,7 +30,9 @@ function RouteComponent() {
 const formSchema = z.object({
   text: z.string().min(8, 'minimun length 8'),
   number: z.number().min(8, 'minumum value 8'),
-  select: z.string().min(1, 'required'),
+  select: z.string().min(1, 'required!'),
+  date: z.iso.date(),
+  date_range: z.iso.date().array(),
 })
 
 const ShowcaseForm = () => {
@@ -42,6 +41,8 @@ const ShowcaseForm = () => {
       text: '',
       number: 7,
       select: '',
+      date: '',
+      date_range: ['', ''],
     },
     validators: {
       onSubmit: formSchema,
@@ -82,18 +83,26 @@ const ShowcaseForm = () => {
             <field.SelectField
               label="Select Field"
               items={[
-                { label: 'React', value: 'react', group: 'framework' },
-                { label: 'Solid', value: 'solid', group: 'framework' },
-                { label: 'Vue', value: 'vue', group: 'framework' },
+                { label: 'React', value: 'react', group: 'Framework' },
+                { label: 'Solid', value: 'solid', group: 'Framework' },
+                { label: 'Vue', value: 'vue', group: 'Framework' },
                 {
                   label: 'Svelte',
                   value: 'svelte',
                   disabled: true,
-                  group: 'framework',
+                  group: 'Framework',
                 },
               ]}
             />
           )}
+        </form.AppField>
+
+        <form.AppField name="date">
+          {(field) => <field.DateField label="Date Field" />}
+        </form.AppField>
+
+        <form.AppField name="date_range">
+          {(field) => <field.DateRangeField label="Date Range Field" />}
         </form.AppField>
         <div
           className={css({

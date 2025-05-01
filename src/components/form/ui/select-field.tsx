@@ -58,6 +58,11 @@ export const SelectField: React.FC<SelectFieldProps> = ({
         invalid={invalid || Boolean(field.state.meta.errors.length)}
         disabled={disabled || isSubmitting}
         positioning={{ sameWidth: true, ...props.positioning }}
+        name={field.name}
+        value={field.state.value ? [field.state.value] : undefined}
+        onValueChange={(details) => {
+          field.handleChange(details.value[0])
+        }}
       >
         {label && <Select.Label>{label}</Select.Label>}
         <Select.Control>
@@ -100,11 +105,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
             </Select.Content>
           </Select.Positioner>
         </Portal>
-        <Select.HiddenSelect
-          name={field.name}
-          value={field.state.value || ''}
-          onChange={(e) => field.handleChange(e.target.value)}
-        />
+        <Select.HiddenSelect />
       </Select.Root>
       {helperText && <Field.HelperText>{helperText}</Field.HelperText>}
       {errors.map((error) => (
