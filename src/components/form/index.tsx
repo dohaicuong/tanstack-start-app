@@ -5,6 +5,7 @@ import { DateRangeField } from './ui/date-range-field'
 import { FormButton } from './ui/form-button'
 import { NumberField } from './ui/number-field'
 import { SelectField } from './ui/select-field'
+import { SwitchField } from './ui/switch-field'
 import { TextField } from './ui/text-field'
 import { TextAreaField } from './ui/textarea-field'
 
@@ -16,6 +17,7 @@ export const { useAppForm } = createFormHook({
     SelectField,
     DateField,
     DateRangeField,
+    SwitchField,
   },
   formComponents: {
     FormButton,

@@ -33,6 +33,7 @@ const formSchema = z.object({
   select: z.string().min(1, 'required!'),
   date: z.iso.date(),
   date_range: z.iso.date().array(),
+  switch: z.literal(true, 'must agree with conditions!'),
 })
 
 const ShowcaseForm = () => {
@@ -43,9 +44,10 @@ const ShowcaseForm = () => {
       select: '',
       date: '',
       date_range: ['', ''],
+      switch: false,
     },
     validators: {
-      onSubmit: formSchema,
+      onChange: formSchema,
     },
     onSubmit: (data) => console.log(data.value),
   })
@@ -103,6 +105,10 @@ const ShowcaseForm = () => {
 
         <form.AppField name="date_range">
           {(field) => <field.DateRangeField label="Date Range Field" />}
+        </form.AppField>
+
+        <form.AppField name="switch">
+          {(field) => <field.SwitchField label="Switch Field" />}
         </form.AppField>
         <div
           className={css({

@@ -5,10 +5,9 @@ form integration
   [x] select-field
   [x] date-field
   [x] date-range-field
-  [ ] file-upload-field
-  [ ] switch-field
+    [ ] error validation not working
+  [x] switch-field
   [ ] radio-group-field
-  [ ] checkbox-group-field
 
 storage integration
   [ ] cloudflare images
