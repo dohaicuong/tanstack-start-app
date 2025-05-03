@@ -7,7 +7,14 @@ form integration
   [x] date-range-field
     [ ] error validation not working
   [x] switch-field
+  [ ] file-upload-field
+  [ ] slider-field
+  [ ] pin-field
+  [ ] rating-field
+  [ ] tag-field
+  [ ] checkbox
   [ ] radio-group-field
+  [ ] combobox-field?
 
 storage integration
   [ ] cloudflare images
