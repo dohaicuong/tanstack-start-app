@@ -34,6 +34,7 @@ const formSchema = z.object({
   date: z.iso.date(),
   date_range: z.iso.date().array(),
   switch: z.literal(true, 'must agree with conditions!'),
+  files: z.file().array(),
 })
 
 const ShowcaseForm = () => {
@@ -45,6 +46,7 @@ const ShowcaseForm = () => {
       date: '',
       date_range: ['', ''],
       switch: false,
+      files: [] as File[],
     },
     validators: {
       onChange: formSchema,
@@ -109,6 +111,10 @@ const ShowcaseForm = () => {
 
         <form.AppField name="switch">
           {(field) => <field.SwitchField label="Switch Field" />}
+        </form.AppField>
+
+        <form.AppField name="files">
+          {(field) => <field.FileUploadField label="File Upload Field" />}
         </form.AppField>
         <div
           className={css({

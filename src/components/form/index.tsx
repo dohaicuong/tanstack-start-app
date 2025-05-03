@@ -2,6 +2,7 @@ import { createFormHook } from '@tanstack/react-form'
 import { fieldContext, formContext } from './context'
 import { DateField } from './ui/date-field'
 import { DateRangeField } from './ui/date-range-field'
+import { FileUploadField } from './ui/file-upload-field'
 import { FormButton } from './ui/form-button'
 import { NumberField } from './ui/number-field'
 import { SelectField } from './ui/select-field'
@@ -18,6 +19,7 @@ export const { useAppForm } = createFormHook({
     DateField,
     DateRangeField,
     SwitchField,
+    FileUploadField,
   },
   formComponents: {
     FormButton,
